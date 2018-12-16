@@ -17,9 +17,6 @@
  * under the License.
  */
 var app = {
-
-    iabOptions: 'location=no,zoom=no,fullscreen=yes,toolbar=no,hidden=yes',
-
     // Application Constructor
     initialize: function () {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
@@ -35,6 +32,18 @@ var app = {
 
     // Update DOM on a Received Event
     receivedEvent: function (id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        console.log('Received Event: ' + id);
+
+        var opts = "location=no,zoom=no,toolbar=no,hidden=yes";
+        var inappbrowserRef = cordova.InAppBrowser.open("https://mobileauth.ieee.org", "_blank", opts);
+        inappbrowserRef.show();
 
     }
 };
